@@ -24,4 +24,4 @@ jobs:
       #- name: Store github token
       #  run: dotnet nuget add source --username jtn70 --password ${{ secrets.JTN70_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Sarpsborg-kommune/index.json"
       - name: Publish the package to github
-        run: dotnet nuget push PowershellWebService/bin/Release/*.nupkg
+        run: dotnet nuget push bin/Release/*.nupkg
