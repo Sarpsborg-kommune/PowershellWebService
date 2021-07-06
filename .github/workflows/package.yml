@@ -1,0 +1,25 @@
+name: Upload powershell web service
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "5.0.x"
+          source-url: https://nuget.pkg.github.com/Sarpsborg-kommune/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - run: dotnet build --configuration Release PowershellWebService
+      - name: Create the package
+        run: dotnet pack --confiugration Release PowetshellWebService
+      - name: Publish the package to GPR
+        run: dotnet nuget push PowershellWebService/bin/Release/*.nupkg
