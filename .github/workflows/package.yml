@@ -20,6 +20,6 @@ jobs:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: dotnet build --configuration Release PowershellWebService
       - name: Create the package
-        run: dotnet pack --confiugration Release PowetshellWebService
+        run: dotnet pack --configration Release PowershellWebService
       - name: Publish the package to GPR
         run: dotnet nuget push PowershellWebService/bin/Release/*.nupkg
