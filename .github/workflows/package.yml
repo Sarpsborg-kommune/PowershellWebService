@@ -18,8 +18,8 @@ jobs:
           source-url: https://nuget.pkg.github.com/Sarpsborg-kommune/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: dotnet build --configuration Release PowershellWebService
+      - run: dotnet build --configuration Release
       - name: Create the package
-        run: dotnet pack --configration Release PowershellWebService
-      - name: Publish the package to GPR
-        run: dotnet nuget push PowershellWebService/bin/Release/*.nupkg
+        run: dotnet pack --configration Release
+      #- name: Publish the package to GPR
+      #  run: dotnet nuget push PowershellWebService/bin/Release/*.nupkg

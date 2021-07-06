@@ -1,4 +1,4 @@
-name: compile powershell web service
+name: Compile powershell web service
 
 on: [push]
 
