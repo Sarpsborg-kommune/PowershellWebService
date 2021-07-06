@@ -16,10 +16,12 @@ jobs:
         with:
           dotnet-version: "5.0.x"
           source-url: https://nuget.pkg.github.com/Sarpsborg-kommune/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        #env:
+        #  NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: dotnet build --configuration Release
       - name: Create the package
         run: dotnet pack --configuration Release
-      #- name: Publish the package to GPR
-      #  run: dotnet nuget push PowershellWebService/bin/Release/*.nupkg
+      - name: Store github token
+        run: dotnet nuget add source --username jtn70 --password ${{ secrets.JTN70_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Sarpsborg-kommune/index.json"
+      - name: Publish the package to GPR
+        run: dotnet nuget push PowershellWebService/bin/Release/*.nupkg --source "github"
