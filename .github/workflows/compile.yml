@@ -13,7 +13,7 @@ jobs:
         with:
           dotnet-version: "5.0.x"
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore --source "https://api.nuget.org/v3/index.json"
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Test
